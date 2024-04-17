@@ -12,6 +12,20 @@
         {% endblock %}
     </head>
     <body>
+        {% if app.user %}
+            <div class="mb-3">
+                {# logout path defined in config/packages/security.yaml #}
+                <a href="{{ path('app_logout') }}">Logout</a> 
+                {% if is_granted('ROLE_ADMIN') %}
+                    | <a href="">Administrator pannel</a>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="mb-3">
+                <a href="{{ path('app_login') }}">Login</a> | <a href="{{ path('app_register') }}">Register</a>
+            </div>
+        {% endif %}
+        
         {% block body %}{% endblock %}
     </body>
 </html>
